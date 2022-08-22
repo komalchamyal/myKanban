@@ -1,0 +1,34 @@
+{% extends "addtask.html" %}
+
+{% block change %}
+<div class="row mb-3">
+    <label for="tasktitle" class="col-4 col-form-label">Task Title</label>
+    <div class="col-7">
+        <input type="text" class="form-control" name="title" id="tasktitle" value="{{task.task_title}}" required>
+    </div>
+</div>
+<div class="row mb-3">
+    <label for="desc" class="col-4 col-form-label">Details</label>
+    <div class="col-7">
+        <input type="text" class="form-control" name='desc' value="{{task.task_desc}}">
+    </div>
+</div>
+<div class="form-group">
+    <!-- Try to disable previous dates -->
+    <div class="row mb-3">
+        <span class="col-4 col-form-label">Deadline</span>
+        <div class="col-7">
+            <input type="date" class="input-group-text col-5 bg-white" id="date" name="deadline" value="{{task.deadline}}" required>
+        </div>
+    </div>
+</div>
+<br>
+<div class="form-check form-switch">
+    <div class="row mb-3">
+        <span class="col-7 col-form-label">Mark as Completed</span>
+        <input class="form-check-input text-center" type="checkbox" 
+          name='completed' value="{{now}}" id="mark" 
+          {% if task.completed %} checked {% endif %}>
+    </div>
+</div>
+{% endblock %}

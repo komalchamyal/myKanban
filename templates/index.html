@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/images/logo2.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>MyKanban</title>
+</head>
+
+<body>
+    <div class="hero">
+        <div class="form-box">
+            <img src="/static/images/slide3.png" width="450"> <br> <br> 
+            <div class="button-box">
+                <div id="butn"> </div>
+                <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                <button type="button" class="toggle-btn" onclick="register()">Register</button>
+            </div> <br>
+
+            <!-- add link -->
+            <form id="login" class="input-group" action="/" method="post">
+                <div style="text-align: center;">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>    
+                <br>
+                <input type="text" class="input-field" name="userid" placeholder="User Id" required>
+                <input type="password" class="input-field" name="pswd" placeholder="Enter Password" required> <br> <br>
+                <br><br>
+                <button type="submit" class="submit-btn" name="btn" value="login">Login</button>
+            </form>
+            <form id="register" class="input-group" action="/" method="post">
+                 <br>
+                <input type="text" class="input-field" name="userid" placeholder="User Id" required>
+                <input type="email" class="input-field" name="email" placeholder="Email Id" required>
+                <input type="password" class="input-field" name="pswd" placeholder="Enter Password" required> <br><br>
+                <br><br>
+                <button type="submit" class="submit-btn" name="btn" value="register">Register</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        var x = document.getElementById("login");
+        var y = document.getElementById("register");
+        var z = document.getElementById("butn");
+
+        function register() {
+            x.style.left = "-440px";
+            y.style.left = "90px";
+            z.style.left = "110px";
+        }
+        function login() {
+            x.style.left = "90px";
+            y.style.left = "490px";
+            z.style.left = "0px";
+        }
+    </script>
+
+</body>
+
+</html>

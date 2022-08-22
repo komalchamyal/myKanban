@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/static/style2.css">
+  <link rel="icon" href="/static/images/logo2.jpg" type="image/x-icon">
+  <title>MyKanban</title>
+</head>
+
+<body style="background-color: lightgrey;">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class=" container-fluid">
+      <!-- add 3 links -->
+      <a class="navbar-brand mb-0 h1" href="{{ url_for('login')}}">
+        <img src="/static/images/logo2.jpg" alt="" width="30" height="30" class="d-inline-block align-text-top">
+        Kanban Board
+      </a>
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/board/{{name}}/summary"><b>Login</b></a>
+        <a class="nav-item nav-link" href="#"> Signup</a>
+        </li>
+      </div>
+    </div>
+  </nav>
+  <div class="col-12 col-lg-6 d-flex justify-content-between mx-auto mt-1">
+    <div id="carousel" class="carousel slide d-block w-100" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/static/images/slide3.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="/static/images/slide1.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="/static/images/slide2.png" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+        <span class="bi bi-caret-left" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+        <span class="bi bi-caret-right" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+
+
+  <div class="row ">
+    <div class="col-md-6 mx-auto p-0">
+      <div class="card">
+        <div class="login-box">
+          <div class="login-snip">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1"
+              class="tab">Login</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+            <div class="login-space">
+              <div class="login">
+                <div class="group">
+                  <label for="user" class="label">Username</label>
+                  <input id="user" type="text" class="input" placeholder="Enter your username">
+                </div>
+                <div class="group">
+                  <label for="pass" class="label">Password</label>
+                  <input id="pass" type="password" class="input" data-type="password" placeholder="Enter your password">
+                </div>
+                <div class="group">
+                  <input id="check" type="checkbox" class="check" checked>
+                  <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                </div>
+                <div class="group">
+                  <input type="submit" class="button" value="Sign In">
+                </div>
+                <div class="hr"></div>
+                <div class="foot">
+                  <a href="#">Forgot Password?</a>
+                </div>
+              </div>
+              <div class="sign-up-form">
+                <div class="group">
+                  <label for="user" class="label">Username</label>
+                  <input id="user" type="text" class="input" placeholder="Create your Username">
+                </div>
+                <div class="group">
+                  <label for="pass" class="label">Password</label>
+                  <input id="pass" type="password" class="input" data-type="password"
+                    placeholder="Create your password">
+                </div>
+                <div class="group">
+                  <label for="pass" class="label">Repeat Password</label>
+                  <input id="pass" type="password" class="input" data-type="password"
+                    placeholder="Repeat your password">
+                </div>
+                <div class="group">
+                  <label for="pass" class="label">Email Address</label>
+                  <input id="pass" type="text" class="input" placeholder="Enter your email address">
+                </div>
+                <div class="group">
+                  <input type="submit" class="button" value="Sign Up">
+                </div>
+                <div class="hr"></div>
+                <div class="foot">
+                  <label for="tab-1">Already Member?</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-confirmation2/dist/bootstrap-confirmation.min.js"></script>
+  <script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+    const myModal = document.getElementById('deleteconfirm')
+
+    myModal.addEventListener('shown.bs.modal', () => {
+    })
+  </script>
+</body>
+
+</html>

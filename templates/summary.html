@@ -1,0 +1,46 @@
+{% extends "board.html" %}
+{% block heading %}
+TASK STATISTICS
+{% endblock %}
+
+{% block change %}
+
+{% for list in lists %}
+<div class="col-10 col-md-5 col-lg-2 mx-auto">
+  {% set n=loop.index %}
+  {% set n= n%5 %}
+  <div class="card " style="background-color:{{color[n]}}" style="width: 15rem;">
+    <!--title of the list-->
+    <div class="card-body  ">
+    {% if list.tasks|length > 0 %}
+      <img src="/static/images/{{list.list_id}}pie.png" class="img-fluid" style="float: right;" width="80" alt="Pie chart of Tasks"> 
+      {% endif %}
+        <h6 class="display-6 fs-5 d-flex justify-content-between mb-0"><b> {{list.list_title|upper}}</b></h6>
+    </div>
+  </div>
+  <div class="card-body text-center" style="background-color:{{color[n]}}" style="width: 15rem; height: 30rem;">
+    {% if list.tasks|length > 0 %}
+    <h6>Total Tasks: {{list.tasks|length}} </h6>
+    {% if list.list_id in completed%}
+    <img src="/static/images/{{list.list_id}}bar.png" class="img-fluid mt-0" alt="Bar chart of Tasks"> 
+    {% else %}
+    <div class="fw-light mb-3 mt-3">No completed tasks yet.</div>
+    {% endif %}
+    <span class="fw-light mt-1">
+      <i class="bi bi-circle-fill" style="color: #99ff99;"></i> Completed: {{data[list.list_id]["completed"]}}</span> <br>
+    <span class="fw-light" > 
+      <i class="bi bi-circle-fill" style="color: #ffcc99;"> </i> Due: {{data[list.list_id]["due"]}} </span><br>
+    <span class="fw-light mb-0" >
+      <i class="bi bi-circle-fill" style="color: #ff6666;"></i>  Deadline Passed: {{data[list.list_id]["passed_deadline"]}}</span>
+    {% else %}
+    <h6>No tasks yet</h6>
+    <p></p>
+    {% endif %}
+
+
+  </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %} My Task {% endblock %}
+{% block content %}
+
+<div class="container">
+    <br>
+    <h2 class="text-center display-6">Task </h2>
+    <br>
+
+    <form method="post">
+        <div class="row">
+            <div class="col-10 col-lg-6 text-center mx-auto" style="background-color:whitesmoke ;">
+                <br>
+                <div class="row ">
+                    <label for="list" class="col-2 col-lg-4 col-form-label">List</label>
+                    <div class="col-10 col-lg-4">
+                        <select class="form-select mb-3 bg-outline-primary"
+                            aria-label=".form-select-lg example" name="chosenlist">
+                            {% for list in lists %}
+                            {% if list.list_id==listid %}
+                            <option name="chosenlist" value="{{list.list_id}}" selected>{{list.list_title}}</option>
+                            {% else %}
+                            <option name="chosenlist" value="{{list.list_id}}">{{list.list_title}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                {% block change %}
+                <div class="row mb-3">
+                    <label for="tasktitle" class="col-3 col-lg-4 col-form-label">Task Title</label>
+                    <div class="col-9 col-lg-7">
+                        <input type="text" class="form-control" name="title" id="tasktitle" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="desc" class="col-3 col-lg-4 col-form-label">Details</label>
+                    <div class="col-9 col-lg-7">
+                        <input type="text" class="form-control" name='desc'>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!-- Try to disable previous dates -->
+                    <div class="row mb-3">
+                        <span class="col-3 col-lg-4 col-form-label">Deadline</span>
+                        <div class="col-9 col-lg-7">
+                            <input type="date" class="input-group-text col-5 bg-white" id="date" name="deadline" required>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-check form-switch">
+                    <div class="row mb-3">
+                        <span class="col-5 col-lg-4 col-form-label">Mark as Completed</span>
+                        <span class="col-2 col-lg-2"> </span> 
+                        <div class="col-4 col-lg-6 ">
+                            <input class="form-check-input text-center" type="checkbox" name='completed' value="{{now}}" id="mark">
+                        </div>
+                    </div>
+                </div>
+                {% endblock %}
+                <div class="form-group">
+                    <!-- Add link to go back -->
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-star"></i> Save
+                    </button>
+                </div>
+                <br>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

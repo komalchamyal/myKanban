@@ -1,0 +1,127 @@
+{% from "macros.html" import capitalise,color %}
+{% extends "base.html" %}
+{% block title %} My Board - {{name}} {% endblock %}
+{% block content %}
+
+
+
+<!-- HEADING -->
+<div class="container-fluid">
+  <br> <BR>
+
+  <h2 class="display-4 text-center">
+    {% block heading %}
+    MY LISTS
+    {% if lists|length == 50 %}
+    <a type="button" data-bs-toggle="popover" class="btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark"
+      title="Max Card Limit Reached"
+      data-bs-content="You can add maximum of 5 lists to your Kanban Board. Delete existing lists to make new ones!">
+      <i class="bi bi-plus-lg"></i>
+    </a>
+    {% else %}
+    <a type="button" href="/board/{{name}}/addlist" class="btn btn-outline-dark btn-rounded"
+      data-mdb-ripple-color="dark">
+      <i class="bi bi-plus-lg"></i>
+    </a>
+    {% endif %}
+    {% endblock %}
+  </h2>
+  <br> <br>
+</div>
+
+
+<!-- CARDS -->
+<div class="container-fluid">
+  <div class="row g-3">
+    {% block change %}
+    {% for list in lists %}
+    <div class="col-10 col-md-5 col-lg-2 mx-auto">
+      {% set n=loop.index %}
+      {% set n= n%5 %}
+      <div class="card" style="background-color:{{color[n]}}" style="width: 15rem;">
+        <!--title of the list-->
+        <div class="card-body">
+          <div class="btn-group d-flex justify-content-end">
+            <h6 class="display-6 fs-5 card-title mb-3"><b> 
+              {{list.list_title|upper}}</b></h6>
+            <i class="btn d-flex justify-content-end bi bi-three-dots-vertical" data-bs-toggle="dropdown"></i>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('editlist',name=name,listid=list.list_id) }}">Edit List</a>
+              </li>
+              <li> <a class="dropdown-item" href="{{ url_for('deletelist',name=name,listid=list.list_id) }}" 
+                onclick="return confirm('Are you sure you want to delete this List along with all its tasks?');">Delete List</a> </li>
+            </ul>
+          </div>
+          <h6 class="card-subtitle lead fs-6 text-muted">{{list.desc}}</h6>
+        </div>
+        <!--tasks in the list -->
+        <div class="list-group list-group-flush">
+          {% for task in list.tasks %}
+          <a role="button" data-bs-toggle="collapse" data-bs-target="#a{{task.task_id}}"
+            class="list-group-item d-flex justify-content-between" style="background-color: {{color[n]}}">
+            {%if task.completed %}
+            <span class="bi bi-dot"> <s>{{capitalise(task.task_title)}} </s></span>
+            <small style="color: green; font-weight: bold"><i class="bi bi-check-circle-fill"></i></small>
+            {% else %} 
+            <span class="bi bi-dot"> {{capitalise(task.task_title)}}</span>
+            <!--javascript to display the status of deadline with respect to current date-->
+            <script>
+              var d1 = new Date("{{task.deadline}}");
+              var d2 = new Date();
+              var diff = d1.getTime() - d2.getTime();
+
+              var daydiff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+              if (daydiff > 0) {
+                document.write('<small class="fw-lighter">' + daydiff + " days left </small>");
+              }
+              else if (daydiff == 0) {
+                document.write('<small class="fw-light" style="font-weight: bold"> Today!</small>');
+              }
+              else {
+                document.write('<small class="fw-lighter">' + Math.abs(daydiff) + " days past!</small>");
+              } 
+            </script>
+            {% endif %}
+          </a>
+          <div class="collapse" id="a{{task.task_id}}">
+            <div class="card card-body">
+              <i>{% if task.task_desc %}{{task.task_desc}}<br> {% endif %}
+                <small>
+                  <b>Deadline:</b> {{task.deadline}}
+                </small></i>
+              <span class="d-flex justify-content-between">
+                <a href="{{url_for('edittask',name=name, listid=list.list_id, taskid= task.task_id)}}" role="button"
+                  class="d-flex justify-content-start" data-bs-toggle="tooltip" data-bs-title="Edit Task" style="color:rgb(19, 126, 0) ;"> <i
+                    class="bi bi-pencil-square"></i> </a>
+                    {% if task.completed %}
+                    <a href="{{url_for('completed',name=name, taskid= task.task_id)}}" role="button"
+                    class="d-flex justify-content-between" data-bs-toggle="tooltip" data-bs-title="Not Completed" style="color:rgb(19, 65, 232) ;"> <i
+                    class="bi bi-check-circle"></i> </a>
+                    {% else %}
+                    <a href="{{url_for('completed',name=name, taskid= task.task_id)}}" role="button"
+                    class="d-flex justify-content-between" data-bs-toggle="tooltip" data-bs-title="Completed" style="color:rgb(19, 65, 232) ;"> <i
+                    class="bi bi-check-circle-fill"></i> </a>
+                    {% endif %}
+                <a href="{{url_for('deletetask',name=name, taskid= task.task_id)}}" role="button"
+                  class=" d-flex justify-content" data-bs-toggle="tooltip" data-bs-title="Delete Task" style="color:rgb(183, 0, 0) ;"> <i class="bi bi-trash3-fill"></i></a>
+              </span>
+
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <!--add task button-->
+        <a type="button" href="/board/{{name}}/{{list.list_id}}/addtask" class="btn btn-outline-success btn-rounded">
+          ADD TASK <i class="bi bi-plus-lg"></i>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+
+
+    {% endblock %}
+  </div>
+</div>
+
+
+{% endblock %}

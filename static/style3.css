@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.hero{
+    height: 100%;
+    width: 100%;
+    background-color: rgb(211, 211, 211);
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+}
+.form-box{
+    width: 450rem;
+    height: 480rem;
+    position: relative;
+    margin: 6% auto;
+    background-color: whitesmoke;
+    padding:5rem;
+    overflow: hidden;
+    box-shadow:  0 2rem 2rem 0 rgb(158, 157, 157), 0 2rem 20rem 0 rgb(158, 157, 157);
+}
+.title{
+    text-align: center;
+    font-weight: bold;
+    position:relative;
+    margin-top: 30rem;
+    margin-bottom: 0rem;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to right, #68f83c, rgb(248, 119, 119),#2d91fc);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    font-size: 25rem;
+} 
+.button-box{
+    width: 220rem;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 0 20rem 9rem rgb(224, 227, 239);
+    border-radius: 30rem;
+}
+.toggle-btn{
+    padding:10rem 30rem;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+
+}
+#butn{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110rem;
+    height: 100%;
+    background: linear-gradient(to right, #5a3deb,#06e6ff);
+    border-radius: 30rem;
+    transition: .5s;
+}
+.input-group{
+    top: 180rem;
+    position: absolute;
+    width: 280rem;
+    transition: .5s;
+}
+.input-field{
+    width: 100%;
+    padding: 10rem 0;
+    margin: 5rem 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1rem solid #999;
+    outline: none;
+    background: transparent;
+}
+.submit-btn{
+    width: 85%;
+    padding: 10rem 30rem;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    background: linear-gradient(to right,#5a3deb,#06e6ff);
+    border: 0;
+    outline: none;
+    border-radius: 30rem;
+}
+#login{
+    left: 90rem;
+}
+#register{
+    left: 490rem;
+}
+
+
+@media(max-width:2500px){
+    html{
+        font-size: 100%;
+    }
+}
+
+@media(max-width:1800px){
+    html{
+        font-size: 80%;
+    }
+}
+
+@media(max-width:1300px){
+    html{
+        font-size: 70%;
+    }
+}
+@media(max-width:950px){
+    html{
+        font-size: 60%;
+    }
+}
+@media(max-width:500px){
+    html{
+        font-size: 50%;
+    }
+    
+}
