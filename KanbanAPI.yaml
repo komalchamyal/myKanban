@@ -1,0 +1,476 @@
+openapi: 3.0.3
+info:
+  title: MyKanban - OpenAPI 3.0
+  description: This API performs all CRUD operations for lists and tasks in your Kanban board.
+    <h2>Error Codes</h2>
+    <table>
+    <thead>
+    <th>Resource</th>
+    <th>Error code</th>
+    <th>Error Message</th>
+    </thead>
+    <tbody>
+    <tr> 
+      <td>Username does not exist</td>
+      <td>L001</td>
+      <td>User Not Found</td>
+    </tr>
+    <tr> 
+      <td>List does not exist</td>
+      <td>L002</td>
+      <td>List Not Found</td>
+    </tr>
+    <tr> 
+      <td>Task does not exist</td>
+      <td>T001</td>
+      <td>Task Not Found</td>
+    </tr>
+    <tr> 
+      <td>Incorrect input date</td>
+      <td>T002</td>
+      <td>Incorrect date format, should be YYYY-MM-DD</td>
+    </tr>
+    </tbody>
+    </table>
+  version: 1.0.0
+  
+servers:
+  - url: http://127.0.0.1:5000/
+tags:
+  - name: list
+    description: Everything about your Lists
+  - name: task
+    description: Everything about the Tasks in your List
+paths:
+  /api/list/{username}:
+    put:
+      tags:
+        - list
+      summary: Update an existing list
+      description: Update an existing list by List Id
+      parameters:
+        - name: username
+          in: path
+          description: User ID to see their lists only
+          required: true
+          explode: true
+          schema:
+            type: string
+            enum:
+              - komal
+      requestBody:
+        description: Update an existent list in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/List'
+        required: true
+      responses:
+        '202':
+          description: Updated Successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List' 
+        '400':
+          description: Bad Request
+        '404':
+          description: Resourse not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - list
+      summary: Add a new list
+      description: Creates a new List with 0 tasks
+      parameters:
+        - name: username
+          in: path
+          description: User ID to see their lists only
+          required: true
+          explode: true
+          schema:
+            type: string
+            enum:
+              - komal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Listadd'
+        required: true
+      responses:
+        '201':
+          description: Added Successfully
+        '400':
+          description: Bad Request
+        '404':
+          description: Resourse not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+        - list
+      summary: Gets all lists
+      description: Fetches all lists of uder with given username
+      parameters:
+        - name: username
+          in: path
+          description: User ID to see their lists only
+          required: true
+          explode: true
+          schema:
+            type: string
+            enum:
+              - komal
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '404':
+          description: Resourse not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - list
+      summary: Deletes a list
+      description: Deletes a list with given ListID
+      parameters:
+        - name: username
+          in: path
+          description: User ID to see their lists only
+          required: true
+          explode: true
+          schema:
+            type: string
+            enum:
+              - komal
+      
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Listdel'
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '404':
+          description: Resourse not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+  
+  /api/task/{username}/{listid}:
+    put:
+      tags:
+        - task
+      summary: Update an existing task
+      description: Update an existing task by Task Id
+      parameters:
+        - name: username
+          in: path
+          description: User ID to see their lists only
+          required: true
+          explode: true
+          schema:
+            type: string
+            enum:
+              - komal
+        - name: listid
+          in: path
+          description: List ID to see that lists only
+          required: true
+          explode: true
+          schema:
+            type: integer
+            enum:
+              - 3
+      requestBody:
+        description: Update an existent task in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+        required: true
+      responses:
+        '202':
+          description: Updated Successfully
+        '400':
+          description: Bad Request
+        '404':
+          description: Resourse not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - task
+      summary: Add a new task
+      description: Add a new task into a given list
+      parameters:
+        - name: username
+          in: path
+          description: User ID to see their lists only
+          required: true
+          explode: true
+          schema:
+            type: string
+            enum:
+              - komal
+        - name: listid
+          in: path
+          description: List ID to see that lists only
+          required: true
+          explode: true
+          schema:
+            type: integer
+            enum:
+              - 3
+      requestBody:
+        description: Add a new task in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Taskadd'
+        required: true
+      responses:
+        '201':
+          description: Added Successfully
+        '400':
+          description: Bad Request
+        '404':
+          description: Resourse not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+        - task
+      summary: Get all tasks
+      description: Get all tasks in the given list
+      parameters:
+        - name: username
+          in: path
+          description: User ID to see their lists only
+          required: true
+          explode: true
+          schema:
+            type: string
+            enum:
+              - komal
+        - name: listid
+          in: path
+          description: List ID to see that lists only
+          required: true
+          explode: true
+          schema:
+            type: integer
+            enum:
+              - 3
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '404':
+          description: Resourse not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - task
+      summary: Delete an existing task
+      description: Delete an existing task in the given list
+      parameters:
+        - name: username
+          in: path
+          description: User ID to see their lists only
+          required: true
+          explode: true
+          schema:
+            type: string
+            enum:
+              - komal
+        - name: listid
+          in: path
+          description: List ID to see that lists only
+          required: true
+          explode: true
+          schema:
+            type: integer
+            enum:
+              - 3
+      requestBody:
+        description: Delete an existent task in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Taskdel'
+        required: true
+      responses:
+        '200':
+          description: Deleted Successfully
+        '400':
+          description: Bad Request
+        '404':
+          description: Resourse not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+
+components:
+  schemas:
+    List:
+      type: object
+      properties:
+        list_id:
+          type: integer
+          format: int64
+          example: 10
+        desc:
+          type: integer
+          format: int64
+          example: this in my new description
+        list_title:
+          type: integer
+          format: int32
+          example: new list title
+    Listadd:
+      type: object
+      properties:
+        list_title:
+          type: integer
+          format: int32
+          example: new list title
+        desc:
+          type: integer
+          format: int64
+          example: this in my new description
+    Listdel:
+      type: object
+      properties:
+        list_id:
+          type: integer
+          format: int64
+          example: 10
+    Task:
+      type: object
+      properties:
+        task_id:
+          type: integer
+          format: int64
+          example: 16
+        task_desc:
+          type: integer
+          format: int64
+          example: this in my new description
+        task_title:
+          type: integer
+          format: int32
+          example: new task title
+        deadline:
+          type: string
+          format: yyyy-dd-mm
+          example: 2022-10-19
+        completed:
+          type: string
+          format: yyyy-dd-mm
+          example: 2022-10-19
+    Taskadd:
+      type: object
+      properties:
+        task_title:
+          type: integer
+          format: int32
+          example: my task title
+        task_desc:
+          type: integer
+          format: int64
+          example: my description
+        deadline:
+          type: string
+          format: yyyy-dd-mm
+          example: 2022-10-19
+        completed:
+          type: string
+          format: yyyy-dd-mm
+          example: 2022-10-19
+    Taskdel:
+      type: object
+      properties:
+        task_id:
+          type: integer
+          format: int64
+          example: 12   
