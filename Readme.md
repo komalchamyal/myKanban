@@ -1,27 +1,22 @@
-# Project Title
+# My Kanban
 
-Simple overview of use/purpose.
+MyKanban is your personalised Kanban Board. MyKanban has much more to offer than a simple To-Do List app.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+#### Create your own boards
+![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/2bar.png?raw=true)
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* Python-flask
+* flask_sqlalchemy
+* matplotlib
 
-### Installing
+### Running
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* Run the app.py file in terminal.
+* Go to https://127.0.0.1:5000/
 
-### Executing program
-
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
