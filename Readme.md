@@ -4,8 +4,31 @@ MyKanban is your personalised Kanban Board. MyKanban has much more to offer than
 
 ## Description
 
-#### Create your own boards
+#### Create your own boards!
+
 ![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/mybord.jpg?raw=true)
+
+
+#### Add new Lists and Tasks with ease
+
+![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/addlist.jpg?raw=true)
+![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/taskedit.jpg?raw=true)
+
+
+#### Graphical Summary
+
+![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/stats.jpg?raw=true)
+
+
+  #### Manage your Board
+
+![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/edit.jpg?raw=true)
+
+  #### Login and Register
+
+![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/login.jpg?raw=true)
+![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/register.jpg?raw=true)
+
 
 ## Getting Started
 
