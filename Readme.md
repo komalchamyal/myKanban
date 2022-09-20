@@ -5,7 +5,7 @@ MyKanban is your personalised Kanban Board. MyKanban has much more to offer than
 ## Description
 
 #### Create your own boards
-![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/2bar.png?raw=true)
+![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/mybord.png?raw=true)
 
 ## Getting Started
 
