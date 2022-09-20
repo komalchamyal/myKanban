@@ -29,6 +29,11 @@ MyKanban is your personalised Kanban Board. MyKanban has much more to offer than
 ![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/login.jpg?raw=true)
 ![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/register.jpg?raw=true)
 
+  #### APIs Provided for CRUD on Lists and Tasks with documentation
+
+![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/doc.jpg?raw=true)
+![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/get.jpg?raw=true)
+![alt text](https://github.com/komalchamyal/myKanban/blob/main/static/images/post.jpg?raw=true)
 
 ## Getting Started
 
